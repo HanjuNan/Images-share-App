@@ -4,7 +4,6 @@ import md5 from 'md5'
 
 // console.log(import.meta.env.VITE_BASE_API);
 
-/** 获取icode */
 
 
 const service = axios.create({
