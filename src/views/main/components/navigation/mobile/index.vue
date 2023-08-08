@@ -1,0 +1,19 @@
+<template>
+   <div>我是移动端</div>
+</template>
+
+<script setup>
+import { getCategory } from '@/api/category';
+
+const getCategoryData = async () => {
+    const res = await getCategory()
+    console.log("getCategoryData res = ", res);
+}
+
+getCategoryData()
+
+</script>
+
+<style lang="scss" scoped>
+
+</style>
