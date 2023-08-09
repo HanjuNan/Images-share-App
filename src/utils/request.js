@@ -4,7 +4,12 @@ import md5 from 'md5'
 
 // console.log(import.meta.env.VITE_BASE_API);
 
-
+/** 获取icode */
+const getIcode = () => {
+  const e = parseInt(Date.now() / 1e3),
+    t = e + 'LGD_Sunday-1991-12-30'
+  return { icode: md5(t), time: e }
+}
 
 const service = axios.create({
     //根据项目的状态,自动切换请求的服务地址
