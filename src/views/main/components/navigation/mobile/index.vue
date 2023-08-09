@@ -4,6 +4,9 @@
      <ul
        ref="ulTarget"
        class="relative flex overflow-x-auto p-1 text-xs text-zinc-600 overflow-hidden"
+       :class="{
+          ulStyle: true
+       }"
      >
        <!-- 汉堡按钮 -->
        <li
@@ -33,13 +36,16 @@
          {{ item.name }}
        </li>
      </ul>
-     <m-popup v-model="isVisible">我是内容</m-popup>
+     <m-popup v-model="isVisible">
+        <menu-vue :categories="data" @onItemClick="onItemClick" />
+     </m-popup>
    </div>
  </template>
 
 <script setup>
 import { useScroll } from '@vueuse/core'
 import { onBeforeUpdate, ref, watch } from 'vue'
+import MenuVue from "@/views/main/components/menu/index.vue"
 // vite构建的项目中,我们可以使用defineProps方法
 defineProps({
   data: {
@@ -75,6 +81,11 @@ const ulTarget = ref(null)
 // 通过vueUse提供的useScroll获取响应式的scroll滚动距离
 const { x: ulScrollLeft } = useScroll(ulTarget)
 
+// 滑块
+const ulStyle = ref({
+  transform: 'translateX(0px)',
+})
+
 //选中item下标
 const currentCategoryIndex = ref(0)
 // watch监听
@@ -88,11 +99,36 @@ watch(currentCategoryIndex, (val) => {
     width: width + 'px',
     height: '22px'
   }
+
+  // 滚动 ul 以确保滑块在视图中的逻辑
+  const ulWidth = ulTarget.value.clientWidth;
+  console.log("ulWidth = ", ulWidth);
+  const sliderRight = ulScrollLeft.value + left + width;
+  console.log("sliderRight = ", sliderRight);
+  const sliderLeft = ulScrollLeft.value + left;
+  console.log("sliderLeft = ", sliderLeft);
+
+  console.log("ulScrollLeft = ",ulScrollLeft);
+  console.log("left = ",left);
+  console.log("width = ",width);
+
+  // if (sliderRight > ulWidth) {
+  //   // 如果滑块在右侧超出视图，向右滚动
+  //   ulTarget.value.scrollLeft += sliderRight - ulWidth;
+  // } else if (sliderLeft < 0) {
+  //   // 如果滑块在左侧超出视图，向左滚动
+  //   ulTarget.value.scrollLeft += sliderLeft;
+  // }
+  ulTarget.value.scrollLeft = sliderLeft;
+
 })
+
+
 
 // item点击事件
 const onItemClick = (index) => {
   currentCategoryIndex.value = index
+  isVisible.value = false
 }
 
 // 控制popup组件展示与隐藏

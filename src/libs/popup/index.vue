@@ -4,12 +4,12 @@
         <teleport to='body'>
             <!-- 蒙版 -->
             <transition name="fade">
-                <div @click="emits('update:modelValue', false)" v-if="modelValue" class=" w-screen h-screen bg-zinc-900/80 z-40 fixed top-0 left-0"></div>
+                <div @click="isVisible = false" v-if="isVisible" class=" w-screen h-screen bg-zinc-900/80 z-40 fixed top-0 left-0"></div>
             </transition>
             
             <!-- 内容 -->
             <transition name="popup-down-up">
-                <div v-if="modelValue" v-bind="$attrs" class=" w-screen bg-white z-50 fixed bottom-0">
+                <div v-if="isVisible" v-bind="$attrs" class=" w-screen bg-white z-50 fixed bottom-0">
                     <slot />
                 </div>
             </transition>
@@ -21,7 +21,7 @@
 
 <script setup>
 import { watch } from 'vue'
-import { useScrollLock } from "@vueuse/core"
+import { useScrollLock, useVModel } from "@vueuse/core"
 const props = defineProps({
     modelValue: {
         required: true,
@@ -29,11 +29,14 @@ const props = defineProps({
     }
 })
 
-const emits = defineEmits(['update:modelValue'])
+defineEmits(['update:modelValue'])
+
+// 是一个响应式数据,当isVisiable值发生变化时,会自动触发emit修改modelValue
+const isVisible = useVModel(props)
 
 // 锁定滚动
 const isLocked = useScrollLock(document.body)
-watch(() => props.modelValue, (val) => {
+watch(isVisible, (val) => {
     isLocked.value = val
 },{
     immediate: true
