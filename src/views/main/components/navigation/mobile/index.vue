@@ -7,6 +7,7 @@
      >
        <!-- 汉堡按钮 -->
        <li
+         @click="onShowPopup"
          class="z-20 fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white dark:bg-zinc-900 shadow-l-white dark:shadow-l-zinc"
        >
          <m-svg-icon class="w-1.5 h-1.5" name="hamburger"></m-svg-icon>
@@ -32,6 +33,7 @@
          {{ item.name }}
        </li>
      </ul>
+     <m-popup v-model="isVisible">我是内容</m-popup>
    </div>
  </template>
 
@@ -51,7 +53,7 @@ defineProps({
 const sliderStyle = ref({
   transform: 'translateX(0px)',
   width: '52px',
-  height: '25px'
+  height: '22px'
 })
 
 // 获取所有的item元素
@@ -77,14 +79,14 @@ const { x: ulScrollLeft } = useScroll(ulTarget)
 const currentCategoryIndex = ref(0)
 // watch监听
 watch(currentCategoryIndex, (val) => {
-  console.log('currentCategoryIndex = ', val)
+  // console.log('currentCategoryIndex = ', val)
 
   const { left, width } = itemRefs[val].getBoundingClientRect()
   // 滑块的位置 = ul横向滚动位置 + 当前元素的left
   sliderStyle.value = {
     transform: `translateX(${ulScrollLeft.value + left - 10 + 'px'})`,
     width: width + 'px',
-    height: '25px'
+    height: '22px'
   }
 })
 
@@ -92,5 +94,14 @@ watch(currentCategoryIndex, (val) => {
 const onItemClick = (index) => {
   currentCategoryIndex.value = index
 }
+
+// 控制popup组件展示与隐藏
+const isVisible = ref(false)
+
+// 汉堡点击事件
+const onShowPopup = () => {
+    isVisible.value = true
+}
+
 </script>
 
