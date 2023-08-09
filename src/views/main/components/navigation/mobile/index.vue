@@ -4,9 +4,7 @@
      <ul
        ref="ulTarget"
        class="relative flex overflow-x-auto p-1 text-xs text-zinc-600 overflow-hidden"
-       :class="{
-          ulStyle: true
-       }"
+       
      >
        <!-- 汉堡按钮 -->
        <li
@@ -81,10 +79,6 @@ const ulTarget = ref(null)
 // 通过vueUse提供的useScroll获取响应式的scroll滚动距离
 const { x: ulScrollLeft } = useScroll(ulTarget)
 
-// 滑块
-const ulStyle = ref({
-  transform: 'translateX(0px)',
-})
 
 //选中item下标
 const currentCategoryIndex = ref(0)
@@ -100,26 +94,26 @@ watch(currentCategoryIndex, (val) => {
     height: '22px'
   }
 
-  // 滚动 ul 以确保滑块在视图中的逻辑
-  const ulWidth = ulTarget.value.clientWidth;
-  console.log("ulWidth = ", ulWidth);
-  const sliderRight = ulScrollLeft.value + left + width;
-  console.log("sliderRight = ", sliderRight);
-  const sliderLeft = ulScrollLeft.value + left;
-  console.log("sliderLeft = ", sliderLeft);
+  // // 滚动 ul 以确保滑块在视图中的逻辑
+  // const ulWidth = ulTarget.value.clientWidth;
+  // console.log("ulWidth = ", ulWidth);
+  // const sliderRight = ulScrollLeft.value + left + width;
+  // console.log("sliderRight = ", sliderRight);
+  // const sliderLeft = ulScrollLeft.value + left;
+  // console.log("sliderLeft = ", sliderLeft);
 
-  console.log("ulScrollLeft = ",ulScrollLeft);
-  console.log("left = ",left);
-  console.log("width = ",width);
+  // console.log("ulScrollLeft = ",ulScrollLeft);
+  // console.log("left = ",left);
+  // console.log("width = ",width);
 
-  // if (sliderRight > ulWidth) {
-  //   // 如果滑块在右侧超出视图，向右滚动
-  //   ulTarget.value.scrollLeft += sliderRight - ulWidth;
-  // } else if (sliderLeft < 0) {
-  //   // 如果滑块在左侧超出视图，向左滚动
-  //   ulTarget.value.scrollLeft += sliderLeft;
-  // }
-  ulTarget.value.scrollLeft = sliderLeft;
+  // // if (sliderRight > ulWidth) {
+  // //   // 如果滑块在右侧超出视图，向右滚动
+  // //   ulTarget.value.scrollLeft += sliderRight - ulWidth;
+  // // } else if (sliderLeft < 0) {
+  // //   // 如果滑块在左侧超出视图，向左滚动
+  // //   ulTarget.value.scrollLeft += sliderLeft;
+  // // }
+  // ulTarget.value.scrollLeft = sliderLeft;
 
 })
 
