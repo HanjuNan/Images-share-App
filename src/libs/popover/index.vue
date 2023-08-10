@@ -20,6 +20,11 @@
 </template>
 
 <script>
+
+// 延迟关闭时间
+const DELAY_TIME = 100
+
+
 //左上
 const PROP_TOP_LEFT = 'top-left'
 //右上
@@ -71,15 +76,23 @@ const isVisable = ref(false)
 /**
  * 鼠标移入触发
  */
+ let timeout;
 const onMouseenter = () => {
   isVisable.value = true
+  if (timeout) {
+    clearTimeout(timeout)
+  }
 }
 
 /**
  * 鼠标移出触发
  */
+
 const onMouseleave = () => {
-  isVisable.value = false
+    timeout = setTimeout(() => {
+        isVisable.value = false
+        timeout = null
+    },DELAY_TIME)
 }
 
 /**
