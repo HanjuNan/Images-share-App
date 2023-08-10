@@ -10,7 +10,6 @@ export default {
 
         // 1.获取当前路径下所有文件夹中的index.vue
         const components = import.meta.glob('./*/index.vue')
-        console.log("components = ",components);
         // 2.遍历获取到的组件模块
         for (const [fullPath, fn] of Object.entries(components)) {
             // 3.利用app.component进行注册

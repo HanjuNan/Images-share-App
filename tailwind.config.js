@@ -15,8 +15,12 @@ module.exports = {
         'l-zinc': '-10px 0 10px #18181b'
       },
       height: {
-          header: '72px',
-          main: 'calc(100vh - 72px)'
+          header: '1.92rem',
+          main: 'calc(100vh - 1.92rem)'
+      },
+      colors: {
+        main: '#f44c58',
+        'hover-main': '#f32836'
       }
     },
   },
