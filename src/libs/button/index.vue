@@ -1,5 +1,6 @@
 <template>
    <button 
+    @click.stop="onBtnClick"
     class=" text-sm text-center rounded duration-150
         flex justify-center items-center"
         :class="[
@@ -29,6 +30,8 @@
 </template>
 
 <script>
+import { computed } from 'vue'
+const EMITS_CLICK = 'click'
 // 1. 构建type风格可选项和size大小可选项
 // type 可选项:表示按钮风格
 const typeEnum = {
@@ -62,7 +65,7 @@ const sizeEnum = {
 </script>
 
 <script setup>
-import { computed } from 'vue'
+
     /**
      * 1. 构建type风格可选项和size大小可选项
      * 2. 通过props让开发者控制按钮
@@ -125,6 +128,19 @@ const props = defineProps({
 const sizeKey = computed(() => {
     return props.icon ? 'icon-' + props.size : props.size
 })
+
+// 5. 处理点击事件
+const emits = defineEmits([EMITS_CLICK])
+
+/**
+ * 点击事件处理
+ */
+const onBtnClick = () => {
+    if (props.loading) {
+        return
+    }
+    emits(EMITS_CLICK)
+}
 
 </script>
 
