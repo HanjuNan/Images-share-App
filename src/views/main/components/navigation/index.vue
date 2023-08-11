@@ -1,5 +1,6 @@
 <template>
   <mobile-navigation v-if="isMobileTerminal"></mobile-navigation>
+  <pc-navigation v-else></pc-navigation>
 </template>
 
 <script setup>
