@@ -2,7 +2,7 @@
  * 处理navigationBar中的数据categorys
  */
 
-import { ALL_CATEGORY_ITEM } from '@/constants';
+import { ALL_CATEGORY_ITEM, CATEGORY_NORMAR_DATA } from '@/constants';
 import { getCategory } from '@/api/category';
 
 export default {
@@ -10,7 +10,10 @@ export default {
     namespaced: true,
     state: () => {
         return {
-            categorys: [ALL_CATEGORY_ITEM]
+            //1.让categorys具备一个初始化数据
+            //2.从服务端获取数据,替换初始化数据
+            //3.为了防止初始化数据太老,我们每次都把获取到的初始化数据作为下一次的初始化数据
+            categorys: CATEGORY_NORMAR_DATA
         }
     },
     mutations: {
