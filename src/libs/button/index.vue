@@ -35,9 +35,9 @@ const EMITS_CLICK = 'click'
 // 1. 构建type风格可选项和size大小可选项
 // type 可选项:表示按钮风格
 const typeEnum = {
-    primary: 'text-white bg-zinc-800 hover:bg-zinc-900 active:bg-zinc-800',
-    main: 'text-white bg-main hover:bg-hover-main active:bg-main',
-    info: 'text-zinc-800 bg-zinc-200 hover:bg-zinc-300 active:bg-zinc-200'
+    primary: ' dark:active:bg-zinc-700 dark:hover:bg-zinc-700 dark:bg-zinc-900 text-white bg-zinc-800 hover:bg-zinc-900 active:bg-zinc-800',
+    main: 'dark:active:bg-zinc-700 dark:hover:bg-zinc-700 dark:bg-zinc-900 text-white bg-main hover:bg-hover-main active:bg-main',
+    info: 'dark:bg-zinc-200 dark:text-zinc-300 text-zinc-800 bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-600 active:bg-zinc-200 dark:active:bg-zinc-200'
 }
 
 // size 可选项: 表示按钮的大小.区分文字按钮和icon按钮

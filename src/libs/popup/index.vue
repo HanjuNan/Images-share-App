@@ -9,7 +9,7 @@
             
             <!-- 内容 -->
             <transition name="popup-down-up">
-                <div v-if="isVisible" v-bind="$attrs" class=" w-screen bg-white z-50 fixed bottom-0">
+                <div v-if="isVisible" v-bind="$attrs" class=" dark:bg-zinc-800 w-screen bg-white z-50 fixed bottom-0">
                     <slot />
                 </div>
             </transition>
