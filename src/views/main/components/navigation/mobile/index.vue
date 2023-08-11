@@ -26,7 +26,7 @@
          :class="{
             ' text-zinc-100 ' : currentCategoryIndex === index
          }"
-         v-for="(item, index) in data"
+         v-for="(item, index) in $store.getters.categorys"
          :key="item.id"
          :ref="setItemRef"
          @click="onItemClick(index)"
@@ -35,7 +35,7 @@
        </li>
      </ul>
      <m-popup v-model="isVisible">
-        <menu-vue :categories="data" @onItemClick="onItemClick" />
+        <menu-vue  @onItemClick="onItemClick" />
      </m-popup>
    </div>
  </template>
@@ -44,13 +44,7 @@
 import { useScroll } from '@vueuse/core'
 import { onBeforeUpdate, ref, watch } from 'vue'
 import MenuVue from "@/views/main/components/menu/index.vue"
-// vite构建的项目中,我们可以使用defineProps方法
-defineProps({
-  data: {
-    type: Array,
-    required: true
-  }
-})
+
 
 // 滑块
 // 滑块

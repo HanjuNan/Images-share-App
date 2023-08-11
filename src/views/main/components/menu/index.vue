@@ -4,7 +4,7 @@
         <ul class=" overflow-y-scroll">
             <li 
              class=" text-lg text-zinc-900 px-1 py-1.5 duration-100 active:bg-zinc-100" 
-             v-for="(item, index) in categories" 
+             v-for="(item, index) in $store.getters.categorys" 
              :key="item.id"
              @click="$emit('onItemClick', index)"
              >
@@ -15,12 +15,7 @@
 </template>
 
 <script setup>
-defineProps({
-    categories: {
-        type: Array,
-        required: true
-    }
-})
+
 
 // v3 推荐自定义事件进行注册一下
 defineEmits(['onItemClick'])

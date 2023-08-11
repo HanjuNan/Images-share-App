@@ -22,7 +22,7 @@
          >
          </m-svg-icon>
          <span
-          class="text-zinc-900 text-sm"
+          class="text-zinc-800 text-sm"
           >{{ item.name }}</span>
       </div>
     </div>
